@@ -1,0 +1,20 @@
+name: Test
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Verify PowerShell
+        shell: bash
+        run: pwsh --version
+
+      - name: Run tests
+        shell: pwsh
+        run: ./tools/Invoke-Tests.ps1
