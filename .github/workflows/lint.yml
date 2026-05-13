@@ -1,0 +1,25 @@
+name: Lint
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  lint:
+    name: Lint
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Run lint gate (offline)
+        shell: pwsh
+        run: |
+          Set-StrictMode -Version Latest
+          $ErrorActionPreference = 'Stop'
+          $scriptPath = Join-Path $PWD 'tools/Invoke-Lint.ps1'
+          if (-not (Test-Path -LiteralPath $scriptPath)) {
+            throw "Lint entry point not found: $scriptPath"
+          }
+          & $scriptPath

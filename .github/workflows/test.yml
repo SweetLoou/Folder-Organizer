@@ -1,0 +1,25 @@
+name: Test
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  test:
+    name: Test
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Run test gate (offline)
+        shell: pwsh
+        run: |
+          Set-StrictMode -Version Latest
+          $ErrorActionPreference = 'Stop'
+          $scriptPath = Join-Path $PWD 'tools/Invoke-Tests.ps1'
+          if (-not (Test-Path -LiteralPath $scriptPath)) {
+            throw "Test entry point not found: $scriptPath"
+          }
+          & $scriptPath
