@@ -1,0 +1,22 @@
+# PowerShell / .NET build artifacts
+bin/
+obj/
+out/
+
+# Test artifacts
+TestResults/
+coverage/
+
+# Logs
+*.log
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/
+
+# PowerShell module packages
+*.nupkg

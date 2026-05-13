@@ -1,0 +1,20 @@
+name: Test
+
+on:
+  push:
+    branches: ["**"]
+  pull_request:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup PowerShell
+        uses: PowerShell/PowerShell-For-GitHub-Actions@v1
+
+      - name: Run tests
+        shell: pwsh
+        run: ./tools/Invoke-Tests.ps1
